@@ -1,0 +1,21 @@
+(executable
+  (name nums_test)
+  (libraries nums)
+  (modes native js)
+  (flags (:standard -linkall -w -3-7-33-35-37 -safe-string -open Nums))
+)
+
+(rule
+  (target nums_test.referencejs)
+  (deps nums_test.bc.js)
+  (action (with-stdout-to %{target} (run node ./nums_test.bc.js))))
+
+(rule
+  (target nums_test.reference)
+  (deps nums_test.exe)
+  (action (with-stdout-to %{target} (run ./nums_test.exe))))
+
+(alias
+  (name runtest)
+  (deps nums_test.reference nums_test.referencejs)
+  (action (diff nums_test.reference nums_test.referencejs)))

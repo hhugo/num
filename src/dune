@@ -1,0 +1,8 @@
+(library
+  (name nums)
+  (libraries)
+  (c_names bng nat_stubs)
+  (c_flags (-I ./))
+  (js_of_ocaml (javascript_files ../../runtime/nat.js))
+  (flags (:standard -w -7-37 -safe-string))
+)
